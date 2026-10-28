@@ -1,0 +1,97 @@
+{
+  "name": "Local YouTube Playlists",
+  "short_name": "Playlist Manager",
+  "description": "An independent system to create and manage YouTube playlists from open tabs, RSS feeds, and subscriptions with a persistent bottom dock.",
+  "version": "1.0.4",
+  "manifest_version": 3,
+  "icons": {
+    "16": "assets/icons/icon_16.png",
+    "32": "assets/icons/icon_32.png",
+    "48": "assets/icons/icon_48.png",
+    "128": "assets/icons/icon_128.png"
+  },
+  "options_ui": {
+    "page": "editor/index.html#/settings",
+    "open_in_tab": true
+  },
+  "action": {
+    "default_title": "Local YouTube Playlists",
+    "default_popup": "popup/popup.html"
+  },
+  "background": {
+    "scripts": [
+      "background/index.js"
+    ],
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://www.youtube.com/watch*"
+      ],
+      "js": [
+        "assets/browser-polyfill.min.js",
+        "content-scripts/watch-tracker.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "permissions": [
+    "tabs",
+    "storage",
+    "notifications",
+    "activeTab",
+    "contextMenus",
+    "identity",
+    "scripting",
+    "unlimitedStorage",
+    "alarms"
+  ],
+  "commands": {
+    "_execute_action": {
+      "suggested_key": {
+        "default": "Alt+Shift+Y",
+        "mac": "Alt+Shift+Y"
+      },
+      "description": "Open Playlist Manager Popup"
+    },
+    "quick_add_active_video": {
+      "suggested_key": {
+        "default": "Alt+Shift+A",
+        "mac": "Alt+Shift+A"
+      },
+      "description": "Quick add current YouTube video to Playlist Builder"
+    }
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "assets/*",
+        "editor/*",
+        "popup/*"
+      ],
+      "matches": [
+        "*://*/*"
+      ]
+    }
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "independent-yt-playlist-manager@elmusleh.github.io",
+      "strict_min_version": "140.0",
+      "data_collection_permissions": {
+        "required": [
+          "none"
+        ]
+      }
+    },
+    "gecko_android": {
+      "strict_min_version": "142.0"
+    }
+  },
+  "host_permissions": [
+    "*://*.ytimg.com/*",
+    "*://*.youtube.com/*",
+    "*://youtube.com/*"
+  ]
+}
