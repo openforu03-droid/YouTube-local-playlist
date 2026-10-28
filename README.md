@@ -1,4 +1,4 @@
-# YouTube Local Playlist
+# Only dark mode for now
 
 Preview of extension
 
